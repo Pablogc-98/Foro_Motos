@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BuscadorController!{% endblock %}
+
+{% block body %}
+{{ parent() }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            
+        </div>
+        <div class="col-md-8">
+        <br><br><br><br>
+  {% for post in posts %}
+                    
+        <div class="card mb-10 " style="max-width: 100%;box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);">
+            <div class="row no-gutters">
+                <div class="col-md-3" style="margin-left: 1.2%;">
+                    <div class="fotoPerfl">                  
+                        {% if post.fotoUsuario != null %}
+                            <img class="card-img-top imagen" style="width: 130px;height: 130px;border-radius: 50%;margin: 0 auto" src={{asset('uploads/files/' ~ post.fotoUsuario) }} alt="">
+                        {% endif %}
+                    </div>                    
+                    <h5>{{post.nombreUsuario}}</h5>
+                    <p> {{post.fecha | date}}<br>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body post" >
+                                <div class="card-body">
+                                        <a href="{{path('postDetails', {id:post.id})}}"><h4 class="card-title">{{post.titulo}}</h4></a>
+                                        
+                                        <div class="alert alert-success tipo" role="alert" style="width:  26.5%; height:50px; text-aling:center">
+                                            <h6 class="tituloTipo">{{post.tipo}}<h6>
+                                        </div>
+                                        
+                                        <p class="card-text"><b>{{post.descripcion}}</b></p>
+                                        
+                                    {% if post.archivo != null %}
+                                    <img class="card-img-top imagen" style="width:25%; heigth:25%" src={{asset('uploads/files/' ~ post.archivo) }} alt="">
+                                    {% endif %}
+                             
+                                </div>
+
+                    </div>
+
+                </div>
+            </div>
+                <br>                            
+        </div>                 <hr>
+                           {% endfor %}
+            
+        </div>
+
+        
+    </div>
+</div>
+{% endblock %}

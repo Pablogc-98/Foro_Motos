@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}RacingSite{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+           {# {{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+
+    </head>
+    <body>
+      <nav class="navegador">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="fs-4">RacingSite</span><img src="../img/pistones.png" style ="width: 45px; heigth:45px;" class="" alt="">
+          </a>
+
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{path('app_inicio')}}" class="nav-link "><b>Inicio</b></a></li>
+            <li class="nav-item"><a href="{{path('app_buscador')}}" class="nav-link"><b>Buscar Post </b></a></li>
+
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li class="nav-item"><a href="{{path('app_perfil')}}" class="nav-link"><b>Perfil</b> </a></li>
+        {% endif %}  
+          </ul>
+
+          <div class="col-md-3 text-end" style="margin-right: 2%;">
+          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a href="{{path('app_logout')}}"><button type="button" class="btn btn-outline-warning me-2"><b>Cerrar Sesión</b></button></a>
+          {% else %}          
+             <a href="{{path('app_login')}}"<button type="button" class="btn btn-outline-primary me-2"><b>Iniciar Sesión</b></button></a>
+             <a href="{{path('app_user')}}"<button type="button" class="btn btn-primary"><b>Registrarse</b></button></a>
+          {% endif %}  
+          </div>
+        </header>
+    </nav>
+        {% block body %} {% endblock %}
+
+    </body>
+    <!--
+         <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+            <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">CheckOut</a></li>
+
+            </ul>
+            <p class="text-center text-body-secondary">© 2023 Company, Inc</p>
+        </footer>
+      -->
+</html>
+        {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+           {#  {{ encore_entry_script_tags('app') }}#}
+        {% endblock %}

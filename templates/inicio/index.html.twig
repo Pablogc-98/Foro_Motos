@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InicioController!{% endblock %}
+
+
+{% block body %}
+
+<div>
+<br>
+<br>
+<br>
+<br>
+</div>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8">
+
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                        <div class="card">
+                            <div class="card-body">
+                                {{ form_start(formulario) }}
+                                            <div class="row p-2">
+                                                <div class="col-md-6 my-2">
+                                                    {{ form_widget(formulario.titulo, {attr:{'placeholder':'Titulo', 'class':'form-control'}}) }}
+                                                </div>
+                                                <div class="col-md-6 my-2">
+                                                    {{ form_widget(formulario.tipo, {attr:{'class':'form-control'}}) }}
+                                                </div>
+                                                <div class="col-md-12 my-2">
+                                                    {{ form_widget(formulario.descripcion, {attr:{'class':'form-control', 'placeholder': '¿Qué quieres contar?'}}) }}
+                                                </div>
+                                                <div class="col-md-12 text-center">
+                                                    {{ form_widget(formulario.archivo, {attr:{'class':'form-control my-2'}}) }}
+                                                </div>
+                                                <div class="col-md-5 my-3"></div>
+                                                <div class="col-md-6 my-3">
+                                                    {{ form_widget(formulario.Publicar, ) }}
+                                                </div>
+
+                                            </div>
+                                {{ form_end(formulario) }}
+                          
+                            </div>
+                        </div>
+                    {% else %}
+                            <div class="alert alert-warning aviso" role="alert">
+                            Inicia sesión para poder publicar un Post <br>
+                            <a href="{{path('app_login')}}" style="color= black"><button type="button" class="btn btn-primary">Iniciar Sesión</button></a>
+                            </div>
+                    {% endif %}
+                    <br>
+
+        {% for post in posts %}
+                    
+        <div class="card mb-10 " style="max-width: 100%;box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);">
+            <div class="row no-gutters">
+                <div class="col-md-3" style="margin-left: 1.2%;">
+                    <div class="fotoPerfl">                  
+                        {% if post.fotoUsuario != null %}
+                            <img class="card-img-top imagen" style="width: 130px;height: 130px;border-radius: 50%;margin: 0 auto" src={{asset('uploads/files/' ~ post.fotoUsuario) }} alt="">
+                        {% endif %}
+                    </div>                    
+                    <h5>{{post.nombreUsuario}}</h5>
+                    <p> {{post.fecha | date}}<br>
+                </div>
+
+                <div class="col-md-8" style="height: 100%;">
+                    <div class="card" >
+                                <div class="card-body post">
+                                        <a href="{{path('postDetails', {id:post.id})}}"><h4 class="card-title">{{post.titulo}}</h4></a>
+                                        
+                                        <div class="alert alert-success tipo" role="alert" style="width:  25.5%; height:50px; text-aling:center">
+                                            <h6 class="tituloTipo">{{post.tipo}}<h6>
+                                        </div>
+                                        
+                                        <p class="card-text"><b>{{post.descripcion}}</b></p>
+                                        
+                                    {% if post.archivo != null %}
+                                    <img class="card-img-top imagen" style="width:250px; heigth:250px" src={{asset('uploads/files/' ~ post.archivo) }} alt="">
+                                    {% endif %}
+                             
+                                </div>
+                    </div>
+                        {% if  is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                            {% if user.id == post.usuario_id %}
+                                <div style="width:25%; float: right; margin-bottom:0%">
+                                    <a href="{{path('remove_post', {id:post.id})}}"><button type="button" class="btn btn-danger"> Borrar Post <i class="fa-sharp fa-solid fa-trash"></i></button></a>
+                                </div>
+                                
+                            {% endif %}
+                        {% endif %}
+                </div>
+            </div>
+                <br>                            
+        </div>                 <hr>
+                           {% endfor %}
+</div> 
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Categorías de Posts:</h4>
+                            <ul class="enlaces">
+                                <li><a href="{{path('postCategorias', {categoria:'🏁Circuito'})}}" class="nav-link "><b>🏁Circuito</b></a></li>
+                                <li><a href="{{path('postCategorias', {categoria:'👨🏼‍🔧Mecanica'})}}" class="nav-link "><b>👨🏼‍🔧Mecanica</b></a></li>
+                                <li><a href="{{path('postCategorias', {categoria:'🏍Rutas'})}}" class="nav-link "><b>🏍Rutas</b></a></li>
+                                <li><a href="{{path('postCategorias', {categoria:'😬Debate'})}}" class="nav-link "><b>😬Debate</b></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+
+
+    
+
+{% endblock %}

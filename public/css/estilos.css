@@ -1,0 +1,65 @@
+body {
+    background-image: url("../img/fondo_web.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 100%;
+    background-attachment: fixed;
+
+}
+.navegador{
+    height: 10%;
+    background-color: white;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    
+}
+.navegador a:hover{
+    text-decoration: underline;
+    font-weight: bold;  
+    color: black;
+}
+.contenedor{
+    position: absolute;
+    z-index: 2;
+}
+.enlaces{
+    font-weight: bold;
+}
+.enlaces a:hover{
+    text-decoration: underline;
+}
+.aviso{
+    font-size: large;
+    text-align: center;
+    
+}
+.tipo{
+    text-align: center;
+
+}
+.tituloTipo{
+    margin-bottom: 10px;
+}
+
+.post img:hover{
+    transform: scale(1.5);
+
+}
+.card{
+    border: 20px;
+}
+footer {
+    background-color: white;
+    margin-bottom: 0%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+}
+
+.fotoPerfl{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}

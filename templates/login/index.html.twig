@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+
+{% block body %}
+
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+<div><br><br><br><br><br><br></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">  
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+
+                            <form action="{{ path('app_login') }}" method="post">
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="loginName"><b>Nombre de Usuarios:<b></label>
+                                <input for="username" type="text"  class="form-control" id="username" name="_username" value="{{ last_username }}" />
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="loginPassword"><b>Contraseña:<b></label>
+                                <input for="password" type="password" id="password" name="_password" class="form-control" />
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 40%">Iniciar Sesión</button>
+
+                            <!-- Register buttons -->
+                            <div class="text-center">
+                                <p>¿No tienes un Usuario? <a href="{{path('app_user')}}">Crear Usuario</a></p>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>        
+    </div>
+</div>
+
+
+
+{% endblock %}
